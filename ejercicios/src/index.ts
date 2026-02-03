@@ -83,8 +83,10 @@ Si el estudiante comete una infracción mostrar un mensaje con el nombre y la in
 
 class infracción {
     faltas: number;
+    nombre: string;
 
-    constructor(faltas: number) {
+    constructor(nombre: string, faltas: number) {
+        this.nombre = nombre;
         this.faltas = faltas;
     }
 
@@ -103,5 +105,5 @@ class infracción {
     }
 
 }
-let estudiante = new infracción(3);
+let estudiante = new infracción("Juan", 3);
 estudiante.seleccion();
