@@ -34,6 +34,7 @@ catch (error) {
     console.log(`[LOG]: se bloqueo un intento de registro invalido: Razón: ${error.message}`);
 }
 console.log('---- fin del registro de vehículos ----');
+//tareaaaa
 /*Ejercicio 1: Sistema de Ahorros Bancarios
 Instrucciones:
 1. Clase Base Cuenta: Debe recibir titular y saldo. Si el saldo es negativo, lanza un error.
@@ -171,4 +172,19 @@ catch (error) {
     console.log(`[LOG]: se bloqueo un intento de registro invalido: Razón: ${error.message}`);
 }
 console.log('---- fin del registro de productos ----');
+//practica
+class contenido {
+    constructor(titulo, duracionMinutos, clasificacion) {
+        this.titulo = titulo;
+        this.duracionMinutos = duracionMinutos;
+        this.clasificacion = clasificacion;
+        if (!titulo.trim())
+            throw new Error("El título no puede estar vacío");
+        if (duracionMinutos <= 0)
+            throw new Error("La duración debe ser mayor a 0");
+    }
+    mostrarDetalles() {
+        console.log(`Titulo: ${this.titulo} | clasificación: ${this.clasificacion}`);
+    }
+}
 //# sourceMappingURL=prac2.js.map
