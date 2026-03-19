@@ -1,58 +1,53 @@
 "use strict";
-/*Ejercicio 3 Sistema de Figuras Geométricas
-Crear una clase abstracta Figura con los métodos calcularArea() y calcularPerimetro(). El
-usuario debe elegir entre Cuadrado, Rectángulo o Círculo e ingresar los valores necesarios
-para calcular los resultados.*/
 Object.defineProperty(exports, "__esModule", { value: true });
-class figura {
+class Figura {
     constructor(base, altura) {
         this.base = base;
         this.altura = altura;
     }
 }
-class rectangulo extends figura {
-    constructor(base, altura) {
-        super(base, altura);
+class Rectangulo extends Figura {
+    calcularArea() {
+        const area = this.base * this.altura;
+        console.log(`Área del rectángulo: ${area}`);
     }
-    area() {
-        const area = parseFloat(this.base) * parseFloat(this.altura);
-        console.log('el área del rectángulo es: ' + area);
-    }
-    perimetro() {
-        const perimetro = 2 * (parseFloat(this.base) + parseFloat(this.altura));
-        console.log('el perímetro del rectángulo es: ' + perimetro);
+    calcularPerimetro() {
+        const perimetro = 2 * (this.base + this.altura);
+        console.log(`Perímetro del rectángulo: ${perimetro}`);
     }
 }
-class circulo extends figura {
+class Cuadrado extends Figura {
+    calcularArea() {
+        const area = this.base * this.base;
+        console.log(`Área del cuadrado: ${area}`);
+    }
+    calcularPerimetro() {
+        const perimetro = 4 * this.base;
+        console.log(`Perímetro del cuadrado: ${perimetro}`);
+    }
+}
+class Circulo extends Figura {
+    // Para círculo solo usa base como radio (altura no se utiliza)
     constructor(base) {
-        super(base, '0');
+        super(base, base);
+        this.base = base;
     }
-    area() {
-        const area = Math.PI * Math.pow(parseFloat(this.base), 2);
-        console.log('el área del círculo es: ' + area);
+    calcularArea() {
+        const area = Math.PI * this.base * this.base;
+        console.log(`Área del círculo: ${area}`);
     }
-    perimetro() {
-        const perimetro = 2 * Math.PI * parseFloat(this.base);
-        console.log('el perímetro del círculo es: ' + perimetro);
-    }
-}
-class cuadrado extends figura {
-    area() {
-        const area = parseFloat(this.base) * parseFloat(this.base);
-        console.log('el área del cuadrado es: ' + area);
-    }
-    perimetro() {
-        const perimetro = 4 * parseFloat(this.base);
-        console.log('el perímetro del cuadrado es: ' + perimetro);
+    calcularPerimetro() {
+        const perimetro = 2 * Math.PI * this.base;
+        console.log(`Perímetro del círculo: ${perimetro}`);
     }
 }
-const rectangulito = new rectangulo('5', '3');
-rectangulito.area();
-rectangulito.perimetro();
-const circulito = new circulo('3');
-circulito.area();
-circulito.perimetro();
-const cuadradito = new cuadrado('4', '4');
-cuadradito.area();
-cuadradito.perimetro();
+const rect = new Rectangulo(5, 3);
+rect.calcularArea();
+rect.calcularPerimetro();
+const cuad = new Cuadrado(4, 4);
+cuad.calcularArea();
+cuad.calcularPerimetro();
+const circ = new Circulo(3);
+circ.calcularArea();
+circ.calcularPerimetro();
 //# sourceMappingURL=ejercicio3.js.map
