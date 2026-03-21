@@ -6,15 +6,16 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 class Pago {
-    construcutor(monto) {
-        if (monto <= 0) {
+    constructor(monto) {
+        this.monto = monto;
+        if (monto <= 0 || Number.isNaN(monto)) {
             throw new Error("El monto debe ser mayor que cero.");
         }
     }
     mostrarRecibo() {
         console.log("_____________________________________________________");
         console.log("Recibo de Pago");
-        console.log("monto procesado: $ " + this.monto);
+        console.log("monto procesado: $ " + this.monto.toFixed(2));
         console.log("estado: exitoso");
         console.log("-------------------------------------------------------");
     }
@@ -22,31 +23,56 @@ class Pago {
 class pagoEfectivo extends Pago {
     procesarPago() {
         console.log("Procesando pago en efectivo...");
-        console.log("por favor, entregue el dinero al cajero");
-    }
-    procesarPago() {
-        console.log("conectando con el banco");
-        console.log("validando tarjeta terminada en.  " + this.nroTarjtea.slice(-4));
-        console.log("procesando pago con tarjeta...");
+        console.log("Por favor, entregue el dinero al cajero.");
     }
 }
+class pagoTarjeta extends Pago {
+    constructor(monto, nroTarjeta) {
+        super(monto);
+        this.nroTarjeta = nroTarjeta;
+        if (!/^[0-9]{12,19}$/.test(nroTarjeta)) {
+            throw new Error("Número de tarjeta inválido.");
+        }
+    }
+    procesarPago() {
+        console.log("Conectando con el banco...");
+        console.log("Validando tarjeta terminada en " + this.nroTarjeta.slice(-4));
+        console.log("Procesando pago con tarjeta...");
+    }
+}
+function finalizarPago(pago) {
+    pago.procesarPago();
+    pago.mostrarRecibo();
+    rl.close();
+}
 console.log("--------sistema de cobro universitario-------");
-rl.question("seleccione metodo de pago (1: efectivo, 2: tarjeta) ", (opción) => {
-    rl.question("ingrese el monto a pagar", (montoinput) => {
+rl.question("Seleccione método de pago (1: efectivo, 2: tarjeta): ", (opcion) => {
+    rl.question("Ingrese el monto a pagar: ", (montoinput) => {
         const montoNum = parseFloat(montoinput);
-        let MIpago;
-        if (opción === "1") {
-            MIpago = new pagoEfectivo(montoNum);
-            finalizarPago(MIpago);
-        }
-        else if (opción === "2") {
-            rl.question("ingrese el numero de tarjeta", (nroTarjeta) => {
-                MIpago = new pagoTarjeta(montoNum, nroTarjeta);
+        try {
+            if (opcion === "1") {
+                const MIpago = new pagoEfectivo(montoNum);
                 finalizarPago(MIpago);
-            });
+            }
+            else if (opcion === "2") {
+                rl.question("Ingrese el número de tarjeta: ", (nroTarjeta) => {
+                    try {
+                        const MIpago = new pagoTarjeta(montoNum, nroTarjeta);
+                        finalizarPago(MIpago);
+                    }
+                    catch (err) {
+                        console.error(err.message);
+                        rl.close();
+                    }
+                });
+            }
+            else {
+                console.log("Opción no válida.");
+                rl.close();
+            }
         }
-        else {
-            console.log("opción no válida");
+        catch (err) {
+            console.error(err.message);
             rl.close();
         }
     });
