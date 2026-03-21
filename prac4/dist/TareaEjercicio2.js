@@ -1,16 +1,4 @@
 "use strict";
-/*Ejercicio 2:
-Crear una herramienta que calcule automáticamente el área y el perímetro de diferentes
-figuras.
-1. Crea la base: Una clase abstracta Figura con los métodos abstractos calcularArea()
-y calcularPerimetro().
-2. Crea las opciones:
-o Cuadrado: Pide el lado.
-o Círculo: Pide el radio.
-3. Usa Readline: Pregunta al usuario qué figura desea y solicita los datos necesarios
-(lado o radio).
-4. Muestra el resultado: Imprime el área y el perímetro con solo 2 decimales usando
-toFixed(2) */
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
