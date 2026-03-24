@@ -1,16 +1,35 @@
-/*Ejercicio1:
-Crear una clase llamada Transporte que contenga:
-• Un atributo protegido (protected) llamado nombre.
-• Un método abstracto llamado calcularCosto(distancia: number) que devuelva un
-número.
-• Un método concreto llamado mostrarDetalle(distancia: number) que imprima en
-consola el nombre del vehículo, la distancia y el total a pagar formateado a dos
-decimales.
-Clases Hijas: Crear dos implementaciones específicas:
-• Taxi: El costo se calcula multiplicando la distancia por $0.50.
-• Uber: El costo se calcula multiplicando la distancia por $0.75.
-Interacción (Consola): Utilizando la librería readline, el programa debe:
-• Preguntar al usuario qué transporte desea utilizar.
-• Solicitar la cantidad de kilómetros a recorrer.
-• Instanciar el objeto correspondiente y mostrar el detalle del cobro. */
+/*Ejercicio 1:
+Crear una clase abstracta Heroe con el atributo nombre.
+1. Definir el método abstracto usarPoder().
+2. Crear la clase Volador (Imprime: "Estoy volando por los cielos").
+3. Crear la clase Fuerte (Imprime: "Estoy levantando un camion").
+4. Instancia: Crear un héroe de cada tipo y llamar a su poder. */
 
+abstract class Heroe {
+    nombre: string;
+
+    constructor(nombre: string) {
+        this.nombre = nombre;
+    }
+
+    abstract usarPoder(): void;
+}
+
+class Volador extends Heroe {
+    usarPoder(): void {
+        console.log("Estoy volando por los cielos");
+    }
+}
+
+class Fuerte extends Heroe {
+    usarPoder(): void {
+        console.log("Estoy levantando un camion");
+    }
+}
+
+// Instancias: Crear un héroe de cada tipo y llamar a su poder
+const heroeVolador = new Volador("Superman");
+const heroeFuerte = new Fuerte("Hulk");
+
+heroeVolador.usarPoder();
+heroeFuerte.usarPoder();
